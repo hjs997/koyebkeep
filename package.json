@@ -1,0 +1,19 @@
+{
+  "name": "nodeitch",
+  "version": "1.0.0",
+  "description": "itch",
+  "main": "run.js",
+  "author": "admin",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "node run.js"
+  },
+  "dependencies": {
+    "axios": "latest",
+    "dotenv": "^16.0.0"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
