@@ -1,15 +1,16 @@
-# 使用官方 Node.js 运行环境
 FROM node:18-alpine
 
-# 设置工作目录
 WORKDIR /app
 
-# 复制 package.json 
+RUN apk add --no-cache --update tini openssl
+
 COPY package.json ./
-RUN npm install
+RUN npm install --only=production --no-audit --no-fund
 
-# 复制加密文件和运行脚本
-COPY .env.enc index.enc run.js ./
+COPY . .
 
-# 设置容器启动时的默认命令
-CMD ["node", "run.js"]
+RUN chmod +x run.js
+
+ENTRYPOINT ["/sbin/tini", "--"]
+
+CMD ["node", "--max-old-space-size=128", "run.js"]
